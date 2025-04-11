@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Shopping - Recommendations</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="recommendations-container">
+        <header>
+            <h1>Smart Shopping</h1>
+            <div class="header-controls">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search products...">
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+                <button id="logoutBtn" class="logout-btn">Logout</button>
+            </div>
+        </header>
+
+        <div class="user-preferences">
+            <h2>Your Preferences</h2>
+            <div id="preferencesList" class="preferences-list">
+                <!-- Preferences will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <main>
+            <div class="recommendations-header">
+                <h2>Recommended Products</h2>
+            </div>
+            <div id="recommendationsGrid" class="recommendations-grid">
+                <!-- Product cards will be dynamically inserted here -->
+            </div>
+        </main>
+    </div>
+    <script src="/static/recommendations.js"></script>
+</body>
+</html> 

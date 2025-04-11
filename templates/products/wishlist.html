@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Wishlist - Smart Shopping{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">Your Wishlist</h2>
+    </div>
+</div>
+
+<div class="row">
+    {% for item in wishlist_items %}
+    <div class="col-md-4">
+        <div class="card product-card">
+            {% if item.product.image %}
+                <img src="{{ item.product.image.url }}" class="card-img-top product-image" alt="{{ item.product.name }}">
+            {% else %}
+                <img src="{% static 'products/default.jpg' %}" class="card-img-top product-image" alt="Default Image">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ item.product.name }}</h5>
+                <p class="card-text">{{ item.product.description|truncatechars:100 }}</p>
+                <p class="card-text"><strong>Price: ${{ item.product.price }}</strong></p>
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'product_detail' item.product.id %}" class="btn btn-primary">View Details</a>
+                    <a href="{% url 'remove_from_wishlist' item.product.id %}" class="btn btn-danger">Remove</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info">Your wishlist is empty.</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %} 

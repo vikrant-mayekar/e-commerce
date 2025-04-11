@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }} - Smart Shopping{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" class="img-fluid rounded" alt="{{ product.name }}">
+        {% else %}
+            <img src="{% static 'products/default.jpg' %}" class="img-fluid rounded" alt="Default Image">
+        {% endif %}
+    </div>
+    <div class="col-md-6">
+        <h2>{{ product.name }}</h2>
+        <p class="text-muted">{{ product.category }}</p>
+        <h3 class="mb-4">${{ product.price }}</h3>
+        <p>{{ product.description }}</p>
+        
+        {% if in_wishlist %}
+            <a href="{% url 'remove_from_wishlist' product.id %}" class="btn btn-danger">
+                Remove from Wishlist
+            </a>
+        {% else %}
+            <a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-primary">
+                Add to Wishlist
+            </a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-12">
+        <h3>Recommended Products</h3>
+    </div>
+    {% for recommended_product, score in recommendations %}
+    <div class="col-md-4">
+        <div class="card product-card">
+            {% if recommended_product.image %}
+                <img src="{{ recommended_product.image.url }}" class="card-img-top product-image" alt="{{ recommended_product.name }}">
+            {% else %}
+                <img src="{% static 'products/default.jpg' %}" class="card-img-top product-image" alt="Default Image">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ recommended_product.name }}</h5>
+                <p class="card-text">{{ recommended_product.description|truncatechars:100 }}</p>
+                <p class="card-text"><strong>Price: ${{ recommended_product.price }}</strong></p>
+                <a href="{% url 'product_detail' recommended_product.id %}" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info">No recommendations available.</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %} 
