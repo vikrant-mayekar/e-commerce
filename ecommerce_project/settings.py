@@ -115,7 +115,7 @@ STATICFILES_DIRS = [
 ]
 
 # Ensure static files are served in production
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Media files (User uploaded files)
 MEDIA_URL = '/media/'
